@@ -1,0 +1,34 @@
+* parse SystemC stuff (SC_MODULE ...)
+* parse ignoring by Synthesis tools stuff (dtor, new ...)
+* escape in string '\"' etc ...
+* error case test
+* type check
+  - function ptr
+  - switch/case/goto/label
+  - cast
+  - typedef 
+  - class/struct
+  	- access(public/protected/private)
+	- member function
+	- field access
+  	- base class
+	- static member
+	- virtual
+	- operator overload
+  - friend
+  - const/mutable
+  - namespace
+  - template
+
+* type check warning
+
+* AST visualization (graphviz etc)
+
+* IR design
+* tanslate to IR
+* code analysis
+* code optimization
+* code generation
+
+//* pre-processor directive '#'
+//* parse template declaration "X3< (1>2) > x3;"
