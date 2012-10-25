@@ -26,7 +26,7 @@ public:
 	virtual ~SCParser();
 
 	AST *parse(const char *file);
-	bool parseConstantExpression(const List<Token> &exps);
+	AST *parseConstantExpression(const List<Token> &exps);
 	int getLastError();
 
 private:

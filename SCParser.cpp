@@ -123,7 +123,7 @@ SCParser::parse(const char *file)
 }
 
 //used for preprocessor #if directive
-bool 
+AST *
 SCParser::parseConstantExpression(const List<Token> &exps)
 {
 	tokens = exps;

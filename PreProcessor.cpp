@@ -292,11 +292,12 @@ PreProcessor::if_directive()
 	assert(tokenit.is(_PP_IF));
 	tokenit.next();
 
-	if (!expression()) {
+	AST *ast = expression();
+	if (!ast) {
 		return false;
 	}
 
-	if (eval()) {
+	if (eval(ast)) {
 		ifBlockEnables.push_back(true);
 	} else {
 		ifBlockEnables.push_back(false);
@@ -324,10 +325,11 @@ PreProcessor::elif_directive()
 		skipUntilElseOrEnd();
 		tag.erase(tokenit-tag);
 	} else {
-		if (!expression()) {
+		AST *ast = expression();
+		if (!ast) {
 			return false;
 		}
-		if (eval()) {
+		if (eval(ast)) {
 			ifBlockEnables.pop_back();
 			ifBlockEnables.push_back(true);
 		} else {
@@ -467,7 +469,7 @@ PreProcessor::identifier()
 	return replaced;
 }
 
-bool 
+AST *
 PreProcessor::expression()
 {
 	List<Token> exps;
@@ -523,9 +525,8 @@ PreProcessor::expression()
 }
 
 bool
-PreProcessor::eval()
+PreProcessor::eval(AST *ast)
 {
-	AST *ast = parser.getAST();
 	DBG("\n\n%s", ast->toString().c_str());
 	return ast->accept(&evaluator);
 }

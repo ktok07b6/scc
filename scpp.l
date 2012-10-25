@@ -1,9 +1,18 @@
 %{
 #include <cstdio>
 #include "token.hpp"
+#include "SourceReader.hpp"
+
 extern "C" int yywrap(void)
 {
     return 1;
+}
+
+#define YY_INPUT(buf,result,max_size)  {\
+  buf[0] = SourceReader.getNextChar(); \
+  result = buf[0] ? 1 : 0; \
+  if (result <= 0) \
+    result = YY_NULL; \
 }
 
 #define ECHO
@@ -198,7 +207,7 @@ PP_DIRECTIVE ^#
 
 \" {BEGIN(STRING); yymore();}
 <STRING>\\\n {}
-<STRING>\\"  {yymore();}
+<STRING>\\\"  {yymore();}
 <STRING>\n {
   lexval = new TokenString(yytext);
   BEGIN(INITIAL);

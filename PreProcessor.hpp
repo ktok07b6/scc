@@ -6,7 +6,7 @@
 #include "token.hpp"
 #include "TokenIterator.hpp"
 #include "Scanner.hpp"
-#include "SCParserAction.hpp"
+#include "SCParser.hpp"
 #include "ConstantExpEvaluator.hpp"
 #include "ref.hpp"
 #include <map>
@@ -35,8 +35,8 @@ private:
 	bool line_directive();
 	bool pragma_directive();
 	bool identifier();
-	bool expression();
-	bool eval();
+	AST *expression();
+	bool eval(AST *ast);
 
 	struct MacroDef {
 		List<String> params;
@@ -69,7 +69,7 @@ private:
 	List<Token> tokens;
 	TokenIterator tokenit;
 	Scanner scanner;
-	SCParserAction parser;
+	SCParser parser;
 	ConstantExpEvaluator evaluator;
 	List<bool> ifBlockEnables;
 };

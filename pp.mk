@@ -13,6 +13,9 @@ SRCS+=\
 	SCParserAction.cpp \
 	PreProcessor.cpp \
 	ConstantExpEvaluator.cpp \
+	Reporter.cpp \
+	SourceReader.cpp \
+	parserUtils.cpp \
 	scpp_main.cpp
 
 INCS+=./
